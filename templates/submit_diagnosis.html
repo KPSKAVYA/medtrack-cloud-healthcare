@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Submit Diagnosis</h2>
+
+{% if appointment %}
+
+<div class="card">
+
+<h3>Appointment Details</h3>
+
+<p><b>Patient:</b> {{ appointment.patient_email }}</p>
+<p><b>Date:</b> {{ appointment.date }}</p>
+<p><b>Time:</b> {{ appointment.time }}</p>
+<p><b>Status:</b> {{ appointment.status }}</p>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<form method="POST">
+
+<input type="hidden" name="appointment_id" value="{{ appointment.appointment_id }}">
+
+<label>Diagnosis</label>
+<textarea name="diagnosis" required></textarea>
+
+<br><br>
+
+<button type="submit" class="btn">Submit Diagnosis</button>
+
+</form>
+
+</div>
+
+{% else %}
+
+<div class="card">
+<p>No appointment found.</p>
+<a href="/doctor_dashboard" class="btn">Back</a>
+</div>
+
+{% endif %}
+
+{% endblock %}
